@@ -12,27 +12,27 @@
 zoom = Vector2(4, 4)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 82.5)
+position = Vector2(0, 81)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(-145.5, 0)
+position = Vector2(-144, 0)
 rotation = 1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(0, -82.5)
+position = Vector2(0, -81)
 rotation = 3.1415927
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(145.5, 0)
+position = Vector2(144, 0)
 rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
