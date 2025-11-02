@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8nlp7ujwcp4r"]
+[gd_scene load_steps=5 format=3 uid="uid://b8nlp7ujwcp4r"]
 
 [ext_resource type="PackedScene" uid="uid://7fgyw33joaxy" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://cqr4eck34ywmh" path="res://scenes/person.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://cuavsv01nf2vl" path="res://scenes/canvas_layer.tscn" id="3_lnu2h"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+collision_layer = 2
+collision_mask = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -37,3 +41,10 @@ rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
+
+[node name="Person" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(73, 56)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_lnu2h")]
+
+[connection signal="ready" from="CanvasLayer" to="Player" method="_on_canvas_layer_ready"]
