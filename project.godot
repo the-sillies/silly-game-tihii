@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="gymnasiearbete"
+config/name="silly game tihii"
 run/main_scene="uid://b8nlp7ujwcp4r"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
