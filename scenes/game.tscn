@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8nlp7ujwcp4r"]
+[gd_scene load_steps=4 format=3 uid="uid://b8nlp7ujwcp4r"]
 
 [ext_resource type="PackedScene" uid="uid://7fgyw33joaxy" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://cqr4eck34ywmh" path="res://scenes/npc.tscn" id="2_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://cuavsv01nf2vl" path="res://scenes/canvas_layer.tscn" id="3_lnu2h"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 
@@ -40,13 +39,5 @@ position = Vector2(0, 81)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DownCollider"]
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
 
-[node name="Polygon2D" type="Polygon2D" parent="DownCollider"]
-polygon = PackedVector2Array(-144, 0, 144, 0, 144, 36, -144, 36)
-
 [node name="Person" parent="." instance=ExtResource("2_yqjtg")]
 position = Vector2(73, 56)
-
-[node name="CanvasLayer" parent="." instance=ExtResource("3_lnu2h")]
-visible = false
-
-[connection signal="ready" from="CanvasLayer" to="Player" method="_on_canvas_layer_ready"]
