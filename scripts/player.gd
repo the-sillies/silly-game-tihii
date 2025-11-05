@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 100.0
 const JUMP_VELOCITY = -400.0
 
 
@@ -23,3 +23,6 @@ func _physics_process(_delta: float) -> void:
 	velocity.y = move_toward(velocity.y, targetspeed.y, SPEED / 3)
 
 	move_and_slide()
+
+func player():
+	pass

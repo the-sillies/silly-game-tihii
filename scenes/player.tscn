@@ -37,7 +37,7 @@ animations = [{
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g2els"]
 size = Vector2(4, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vyb7"]
 size = Vector2(10, 10)
 
 [node name="Player" type="CharacterBody2D"]
@@ -55,4 +55,4 @@ scale = Vector2(2.5, 2.5)
 texture = SubResource("PlaceholderTexture2D_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_g2els")
+shape = SubResource("RectangleShape2D_3vyb7")

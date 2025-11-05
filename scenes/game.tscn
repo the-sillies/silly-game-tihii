@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8nlp7ujwcp4r"]
 
 [ext_resource type="PackedScene" uid="uid://7fgyw33joaxy" path="res://scenes/player.tscn" id="1_uwrxv"]
-[ext_resource type="PackedScene" uid="uid://cqr4eck34ywmh" path="res://scenes/person.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://cqr4eck34ywmh" path="res://scenes/npc.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cuavsv01nf2vl" path="res://scenes/canvas_layer.tscn" id="3_lnu2h"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
@@ -9,42 +9,44 @@
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
-collision_layer = 2
-collision_mask = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 81)
+[node name="UpCollider" type="StaticBody2D" parent="."]
+position = Vector2(0, -81)
+rotation = -3.1415925
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpCollider"]
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="LeftCollider" type="StaticBody2D" parent="."]
 position = Vector2(-144, 0)
 rotation = 1.5707964
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftCollider"]
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(0, -81)
-rotation = 3.1415927
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-shape = SubResource("WorldBoundaryShape2D_uwrxv")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+[node name="RightCollider" type="StaticBody2D" parent="."]
 position = Vector2(144, 0)
 rotation = -1.5707964
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightCollider"]
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
+
+[node name="DownCollider" type="StaticBody2D" parent="."]
+position = Vector2(0, 81)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownCollider"]
+shape = SubResource("WorldBoundaryShape2D_uwrxv")
+
+[node name="Polygon2D" type="Polygon2D" parent="DownCollider"]
+polygon = PackedVector2Array(-144, 0, 144, 0, 144, 36, -144, 36)
 
 [node name="Person" parent="." instance=ExtResource("2_yqjtg")]
 position = Vector2(73, 56)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_lnu2h")]
+visible = false
 
 [connection signal="ready" from="CanvasLayer" to="Player" method="_on_canvas_layer_ready"]
