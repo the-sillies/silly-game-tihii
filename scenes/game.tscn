@@ -1,43 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8nlp7ujwcp4r"]
+[gd_scene load_steps=6 format=3 uid="uid://b8nlp7ujwcp4r"]
 
+[ext_resource type="Script" uid="uid://bj8wdw4tdyg56" path="res://scripts/game.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://7fgyw33joaxy" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://ce12wtc71678s" path="res://scripts/camera.gd" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cqr4eck34ywmh" path="res://scenes/npc.tscn" id="2_yqjtg"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
+[sub_resource type="LabelSettings" id="LabelSettings_lnu2h"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_lbhrr")
 
-[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_scale = 0.8
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logs" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+offset_right = 56.0
+offset_bottom = 23.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+label_settings = SubResource("LabelSettings_lnu2h")
+
+[node name="Player" parent="." node_paths=PackedStringArray("logs") instance=ExtResource("1_uwrxv")]
+logs = NodePath("../CanvasLayer/Control/Logs")
+
+[node name="Camera2D" type="Camera2D" parent="Player" node_paths=PackedStringArray("player")]
 zoom = Vector2(4, 4)
+process_callback = 0
+limit_enabled = false
+position_smoothing_enabled = true
+script = ExtResource("2_lnu2h")
+player = NodePath("..")
 
-[node name="UpCollider" type="StaticBody2D" parent="."]
-position = Vector2(0, -81)
-rotation = -3.1415925
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UpCollider"]
-shape = SubResource("WorldBoundaryShape2D_uwrxv")
-
-[node name="LeftCollider" type="StaticBody2D" parent="."]
-position = Vector2(-144, 0)
-rotation = 1.5707964
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftCollider"]
-shape = SubResource("WorldBoundaryShape2D_uwrxv")
-
-[node name="RightCollider" type="StaticBody2D" parent="."]
-position = Vector2(144, 0)
-rotation = -1.5707964
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightCollider"]
-shape = SubResource("WorldBoundaryShape2D_uwrxv")
-
-[node name="DownCollider" type="StaticBody2D" parent="."]
-position = Vector2(0, 81)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DownCollider"]
-shape = SubResource("WorldBoundaryShape2D_uwrxv")
-
-[node name="Person" parent="." instance=ExtResource("2_yqjtg")]
-position = Vector2(73, 56)
+[node name="NPC" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(74, 57)
