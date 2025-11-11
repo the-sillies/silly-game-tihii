@@ -6,10 +6,11 @@ extends CharacterBody2D
 func player():
 	pass
 
-const SPEED = 100.0
+@export var WALK_SPEED: float
+@export var RUN_SPEED: float
 
-var is_interacting = false
-
+var is_interacting := false
+var is_running := false
 var absolute_velocity := Vector2()
 
 
@@ -18,13 +19,17 @@ func _physics_process(delta: float) -> void:
 	var direction_y : float = 0
 
 	if not is_interacting:
-		direction_x = Input.get_axis("left", "right")
-		direction_y = Input.get_axis("up", "down")
+		direction_x = Input.get_axis('left', 'right')
+		direction_y = Input.get_axis('up', 'down')
+		
+	is_running = Input.is_action_pressed('run')
 
-	var targetspeed = {x = direction_x * SPEED, y = direction_y * SPEED}
+	var target_speed := RUN_SPEED if is_running else WALK_SPEED
 
-	absolute_velocity.x = move_toward(absolute_velocity.x, targetspeed.x, SPEED / 5)
-	absolute_velocity.y = move_toward(absolute_velocity.y, targetspeed.y, SPEED / 5)
+	var target_speed_vector := {x = direction_x * target_speed, y = direction_y * target_speed}
+
+	absolute_velocity.x = move_toward(absolute_velocity.x, target_speed_vector.x, target_speed / 5)
+	absolute_velocity.y = move_toward(absolute_velocity.y, target_speed_vector.y, target_speed / 5)
 
 	velocity = absolute_velocity * delta * 60
 
@@ -33,14 +38,13 @@ func _physics_process(delta: float) -> void:
 	elif velocity.x > 0:
 		sprite.flip_h = true
 
-	var speed = velocity.length()
-	if speed <= 0:
-		sprite.play('idle')
-	elif speed <= 80:
+	var speed := velocity.length()
+	if speed > 75:
+		sprite.play('run')
+	elif speed > 10:
 		sprite.play('walk')
 	else:
-		#sprite.play('run')
-		pass
+		sprite.play('idle')
 
 	move_and_slide()
 

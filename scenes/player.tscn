@@ -175,6 +175,8 @@ size = Vector2(18, 8)
 motion_mode = 1
 script = ExtResource("1_g2els")
 sprite = NodePath("AnimatedSprite2D")
+WALK_SPEED = 50.0
+RUN_SPEED = 100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -10)
@@ -184,5 +186,5 @@ autoplay = "idle"
 frame_progress = 0.8445065
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 22)
+position = Vector2(0, 18)
 shape = SubResource("RectangleShape2D_3vyb7")
