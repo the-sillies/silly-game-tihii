@@ -12,7 +12,7 @@ func player():
 var is_interacting := false
 var is_running := false
 var absolute_velocity := Vector2()
-
+var interactable_nodes := []
 
 func _physics_process(delta: float) -> void:
 	var direction_x : float = 0
@@ -49,5 +49,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _process(delta: float) -> void:
-	logs.text = ('{pos}\n{vel}').format({'pos': position, 'vel': velocity})
+	logs.text = ('{pos}\n{vel}\n{interact}').format({'pos': position, 'vel': velocity, 'interact': '\n'.join(interactable_nodes)})
+	pass
+
+func add_interactable(node: Node2D):
+	interactable_nodes.append(node)
+	print('added: ', node)
+	pass
+	
+func remove_interactable(node: Node2D):
+	var id := node.get_instance_id()
+	interactable_nodes = interactable_nodes.filter(func(item): return item.get_instance_id() != id)
+	print('removed: ', node)
 	pass

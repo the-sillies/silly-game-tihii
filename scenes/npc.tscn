@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqr4eck34ywmh"]
+[gd_scene load_steps=5 format=3 uid="uid://cqr4eck34ywmh"]
 
 [ext_resource type="Script" uid="uid://dnsn8li3pbdjp" path="res://scripts/npc.gd" id="1_nh2m4"]
-[ext_resource type="FontFile" uid="uid://dh83g4mo14000" path="res://assets/fonts/smallest_pixel-7.ttf" id="2_abqhh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5dovg"]
 radius = 15.0
@@ -11,13 +10,6 @@ size = Vector2(4, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nh2m4"]
 size = Vector2(10, 10)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rv78h"]
-bg_color = Color(0, 0, 0, 0.39215687)
-
-[sub_resource type="LabelSettings" id="LabelSettings_7n8xq"]
-font = ExtResource("2_abqhh")
-font_size = 10
 
 [node name="NPC" type="CharacterBody2D"]
 script = ExtResource("1_nh2m4")
@@ -35,42 +27,5 @@ texture = SubResource("PlaceholderTexture2D_c62xm")
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_nh2m4")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Container" type="PanelContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -3.5
-offset_top = -9.0
-offset_right = 3.5
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_rv78h")
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/Container"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = -1
-theme_override_constants/margin_right = 1
-theme_override_constants/margin_bottom = -1
-
-[node name="Label" type="Label" parent="Control/Container/MarginContainer"]
-layout_mode = 2
-text = "F"
-label_settings = SubResource("LabelSettings_7n8xq")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [connection signal="body_entered" from="interact_detection_area" to="." method="_on_interact_detection_area_body_entered"]
+[connection signal="body_exited" from="interact_detection_area" to="." method="_on_interact_detection_area_body_exited"]
