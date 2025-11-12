@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	if not is_interacting:
 		direction_x = Input.get_axis('left', 'right')
 		direction_y = Input.get_axis('up', 'down')
-		
+
 	is_running = Input.is_action_pressed('run')
 
 	var target_speed := RUN_SPEED if is_running else WALK_SPEED
@@ -56,7 +56,7 @@ func add_interactable(node: Node2D):
 	interactable_nodes.append(node)
 	print('added: ', node)
 	pass
-	
+
 func remove_interactable(node: Node2D):
 	var id := node.get_instance_id()
 	interactable_nodes = interactable_nodes.filter(func(item): return item.get_instance_id() != id)
