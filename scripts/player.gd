@@ -2,9 +2,7 @@ extends CharacterBody2D
 
 @export var logs: Label
 @export var sprite: AnimatedSprite2D
-
-func player():
-	pass
+@export var shadow: Sprite2D
 
 @export var WALK_SPEED: float
 @export var RUN_SPEED: float
@@ -13,6 +11,19 @@ var is_interacting := false
 var is_running := false
 var absolute_velocity := Vector2()
 var interactable_nodes := []
+
+var shadow_coords := Vector2()
+var shadow_coords_flipped := Vector2()
+
+func set_shadow_coords(x: float, y: float):
+	shadow_coords = Vector2(x, y)
+	shadow_coords_flipped = Vector2(-x, y)
+
+func player():
+	pass
+
+func _ready():
+	set_shadow_coords(1, 2)
 
 func _physics_process(delta: float) -> void:
 	var direction_x : float = 0
@@ -35,8 +46,10 @@ func _physics_process(delta: float) -> void:
 
 	if velocity.x < 0:
 		sprite.flip_h = false
+		shadow.position = shadow_coords
 	elif velocity.x > 0:
 		sprite.flip_h = true
+		shadow.position = shadow_coords_flipped
 
 	var speed := velocity.length()
 	if speed > 75:

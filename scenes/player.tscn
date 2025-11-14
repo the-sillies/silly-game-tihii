@@ -172,26 +172,24 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vyb7"]
 size = Vector2(18, 8)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "shadow")]
 motion_mode = 1
 script = ExtResource("1_g2els")
-sprite = NodePath("Node2D/AnimatedSprite2D")
+sprite = NodePath("AnimatedSprite2D")
+shadow = NodePath("Shadow")
 WALK_SPEED = 50.0
 RUN_SPEED = 100.0
 
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-position = Vector2(0, 20)
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(1, 2)
 texture = ExtResource("2_qhqgy")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
-position = Vector2(0, -10)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -28)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0, 18)
 shape = SubResource("RectangleShape2D_3vyb7")
