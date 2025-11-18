@@ -181,6 +181,7 @@ WALK_SPEED = 50.0
 RUN_SPEED = 100.0
 
 [node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
 position = Vector2(1, 2)
 texture = ExtResource("2_qhqgy")
 
