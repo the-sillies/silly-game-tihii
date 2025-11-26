@@ -50,6 +50,8 @@ func _physics_process(delta: float) -> void:
 	elif velocity.x > 0:
 		sprite.flip_h = true
 		shadow.position = shadow_coords_flipped
+	if logs:
+		logs.text = ('{pos}\n{vel}\n{interact}').format({'pos': position, 'vel': velocity, 'interact': '\n'.join(interactable_nodes)})
 
 	var speed := velocity.length()
 	if speed > 75:
@@ -62,7 +64,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _process(delta: float) -> void:
-	logs.text = ('{pos}\n{vel}\n{interact}').format({'pos': position, 'vel': velocity, 'interact': '\n'.join(interactable_nodes)})
 	pass
 
 func add_interactable(node: Node2D):
