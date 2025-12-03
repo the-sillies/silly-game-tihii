@@ -12,14 +12,14 @@
 },
 &"default_portrait": "default",
 &"description": "",
-&"display_name": "butch",
+&"display_name": "himari",
 &"mirror": false,
 &"nicknames": [""],
 &"offset": Vector2(0, 0),
 &"portraits": {
 "default": {
 "export_overrides": {
-"image": "\"res://assets/sprites/butch_default.png\""
+"image": "\"res://assets/sprites/himari_default.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),

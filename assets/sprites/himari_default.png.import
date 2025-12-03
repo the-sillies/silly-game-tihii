@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://disp3luapibpp"
-path="res://.godot/imported/butch_default.png-79551c215b684cac39f0612808c67a75.ctex"
+uid="uid://b8qmpc2p3t1ir"
+path="res://.godot/imported/himari_default.png-df551cd96c6a73327340e5145969c306.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/butch_default.png"
-dest_files=["res://.godot/imported/butch_default.png-79551c215b684cac39f0612808c67a75.ctex"]
+source_file="res://assets/sprites/himari_default.png"
+dest_files=["res://.godot/imported/himari_default.png-df551cd96c6a73327340e5145969c306.ctex"]
 
 [params]
 
