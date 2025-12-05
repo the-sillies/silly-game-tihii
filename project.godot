@@ -22,6 +22,7 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 [dialogic]
 
 directories/dch_directory={
+"detective": "res://dialogic/characters/detective.dch",
 "ethan": "res://dialogic/characters/ethan.dch",
 "himari": "res://dialogic/characters/himari.dch",
 "invisigal": "res://dialogic/characters/invisigal.dch",
