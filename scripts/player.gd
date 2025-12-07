@@ -71,15 +71,12 @@ func _process(delta: float) -> void:
 		sprite.flip_h = true
 		shadow.position = shadow_coords_flipped
 
-	pass
 
 func add_interactable(node: Node2D):
 	interactable_nodes.append(node)
 	print('added: ', node)
-	pass
 
 func remove_interactable(node: Node2D):
 	var id := node.get_instance_id()
 	interactable_nodes = interactable_nodes.filter(func(item): return item.get_instance_id() != id)
 	print('removed: ', node)
-	pass
