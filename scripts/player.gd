@@ -9,6 +9,7 @@ extends CharacterBody2D
 
 var is_interacting := false
 var is_running := false
+var is_flipped := false
 var absolute_velocity := Vector2()
 var interactable_nodes := []
 
@@ -45,11 +46,13 @@ func _physics_process(delta: float) -> void:
 	velocity = absolute_velocity * delta * 60
 
 	if velocity.x < 0:
-		sprite.flip_h = false
-		shadow.position = shadow_coords
+		is_flipped = false
 	elif velocity.x > 0:
-		sprite.flip_h = true
-		shadow.position = shadow_coords_flipped
+		is_flipped = true
+
+	move_and_slide()
+
+func _process(delta: float) -> void:
 	if logs:
 		logs.text = ('{pos}\n{vel}\n{interact}').format({'pos': position, 'vel': velocity, 'interact': '\n'.join(interactable_nodes)})
 
@@ -61,18 +64,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		sprite.play('idle')
 
-	move_and_slide()
+	if not is_flipped:
+		sprite.flip_h = false
+		shadow.position = shadow_coords
+	else:
+		sprite.flip_h = true
+		shadow.position = shadow_coords_flipped
 
-func _process(delta: float) -> void:
-	pass
 
 func add_interactable(node: Node2D):
 	interactable_nodes.append(node)
 	print('added: ', node)
-	pass
 
 func remove_interactable(node: Node2D):
 	var id := node.get_instance_id()
 	interactable_nodes = interactable_nodes.filter(func(item): return item.get_instance_id() != id)
 	print('removed: ', node)
-	pass

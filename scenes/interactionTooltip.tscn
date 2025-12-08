@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm7x4exwl3jq8"]
+
+[ext_resource type="FontFile" uid="uid://dh83g4mo14000" path="res://assets/fonts/smallest_pixel-7.ttf" id="1_5p55f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5p55f"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_r67kn"]
+font = ExtResource("1_5p55f")
+font_size = 10
+
+[node name="Control" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 12.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5p55f")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "F"
+label_settings = SubResource("LabelSettings_r67kn")
