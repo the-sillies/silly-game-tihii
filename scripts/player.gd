@@ -11,7 +11,7 @@ var is_interacting := false
 var is_running := false
 var is_flipped := false
 var absolute_velocity := Vector2()
-var interactable_nodes := []
+var interactable_nodes: Array[Node2D] = []
 
 var shadow_coords := Vector2()
 var shadow_coords_flipped := Vector2()
@@ -71,6 +71,9 @@ func _process(delta: float) -> void:
 		sprite.flip_h = true
 		shadow.position = shadow_coords_flipped
 
+	if Input.is_action_just_pressed("interact"):
+		print('interacted')
+		print(find_closest_interactable_index())
 
 func add_interactable(node: Node2D):
 	interactable_nodes.append(node)
@@ -79,4 +82,12 @@ func add_interactable(node: Node2D):
 func remove_interactable(node: Node2D):
 	var id := node.get_instance_id()
 	interactable_nodes = interactable_nodes.filter(func(item): return item.get_instance_id() != id)
+
 	print('removed: ', node)
+
+func find_closest_interactable_index():
+	var distances = interactable_nodes.map(func(node): position.distance_to(node.position))
+	return distances.find(distances.min())
+
+func _on_find_closest_timeout() -> void:
+	pass # Replace with function body.

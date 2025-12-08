@@ -192,5 +192,8 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_3vyb7")
+
+[node name="FindClosest" type="Timer" parent="."]
+
+[connection signal="timeout" from="FindClosest" to="." method="_on_find_closest_timeout"]
