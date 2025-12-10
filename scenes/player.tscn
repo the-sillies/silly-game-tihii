@@ -195,5 +195,7 @@ autoplay = "idle"
 shape = SubResource("RectangleShape2D_3vyb7")
 
 [node name="FindClosest" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
 
 [connection signal="timeout" from="FindClosest" to="." method="_on_find_closest_timeout"]

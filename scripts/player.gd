@@ -73,7 +73,6 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("interact"):
 		print('interacted')
-		print(find_closest_interactable_index())
 
 func add_interactable(node: Node2D):
 	interactable_nodes.append(node)
@@ -82,12 +81,37 @@ func add_interactable(node: Node2D):
 func remove_interactable(node: Node2D):
 	var id := node.get_instance_id()
 	interactable_nodes = interactable_nodes.filter(func(item): return item.get_instance_id() != id)
-
 	print('removed: ', node)
 
-func find_closest_interactable_index():
-	var distances = interactable_nodes.map(func(node): position.distance_to(node.position))
-	return distances.find(distances.min())
+func sort_interactable_by_distance():
+	return quicksort(interactable_nodes, func(a,b): return position.distance_squared_to(a.position) < position.distance_squared_to(b.position))
+
+func update_closest_interactable():
+	print(typeof([] as Array[Node2D]))
+	interactable_nodes = (sort_interactable_by_distance() as Array[Node2D])
+	pass
 
 func _on_find_closest_timeout() -> void:
-	pass # Replace with function body.
+	update_closest_interactable()
+
+func quicksort(array: Array, callable: Callable):
+	if array.size() <= 1:
+		return array
+
+	var pivot = array[0]
+
+	var left = []
+	var right = []
+
+	for i in range(1, array.size()):
+		@warning_ignore("standalone_ternary")
+		if callable.call(array[i], pivot):
+			left.append(array[i])
+		else:
+			right.append(array[i])
+
+	var result: Array = quicksort(left, callable)
+	result.append(pivot)
+	result.append_array(quicksort(right, callable))
+
+	return result

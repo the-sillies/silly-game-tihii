@@ -123,3 +123,6 @@ player = NodePath("..")
 
 [node name="NPC" parent="." instance=ExtResource("2_yqjtg")]
 position = Vector2(74, 57)
+
+[node name="NPC2" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(100, 57)
