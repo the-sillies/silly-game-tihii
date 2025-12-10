@@ -104,7 +104,6 @@ func quicksort(array: Array, callable: Callable):
 	var right = []
 
 	for i in range(1, array.size()):
-		@warning_ignore("standalone_ternary")
 		if callable.call(array[i], pivot):
 			left.append(array[i])
 		else:
