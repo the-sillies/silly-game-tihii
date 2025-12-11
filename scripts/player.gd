@@ -87,8 +87,9 @@ func sort_interactable_by_distance():
 	return quicksort(interactable_nodes, func(a,b): return position.distance_squared_to(a.position) < position.distance_squared_to(b.position))
 
 func update_closest_interactable():
-	print(typeof([] as Array[Node2D]))
-	interactable_nodes = (sort_interactable_by_distance() as Array[Node2D])
+	var sorted: Array[Node2D] = []
+	sorted.assign(sort_interactable_by_distance())
+	interactable_nodes = sorted
 	pass
 
 func _on_find_closest_timeout() -> void:
