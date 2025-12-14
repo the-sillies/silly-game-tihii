@@ -76,6 +76,10 @@ func _process(delta: float) -> void:
 		shadow.position = shadow_coords_flipped
 
 	if Input.is_action_just_pressed("interact"):
+		if interactable_nodes[0].has_method('handle_interaction'):
+			interactable_nodes[0].handle_interaction()
+		else:
+			push_warning('%s has no method "handle_interaction"' % interactable_nodes[0])
 		print('interacted')
 
 func add_interactable(node: Node2D):
