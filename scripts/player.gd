@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var logs: Label
 @export var sprite: AnimatedSprite2D
 @export var shadow: Sprite2D
+@export var interaction_tooltip: PackedScene
 
 @export var WALK_SPEED: float
 @export var RUN_SPEED: float
@@ -11,10 +12,12 @@ var is_interacting := false
 var is_running := false
 var is_flipped := false
 var absolute_velocity := Vector2()
-var interactable_nodes := []
+var interactable_nodes: Array[Node2D] = []
 
 var shadow_coords := Vector2()
 var shadow_coords_flipped := Vector2()
+
+var interaction_tooltip_instance
 
 func set_shadow_coords(x: float, y: float):
 	shadow_coords = Vector2(x, y)
@@ -25,6 +28,9 @@ func player():
 
 func _ready():
 	set_shadow_coords(1, 2)
+	interaction_tooltip_instance = interaction_tooltip.instantiate()
+	Dialogic.timeline_started.connect(_on_timeline_started)
+	Dialogic.timeline_ended.connect(_on_timeline_ended)
 
 func _physics_process(delta: float) -> void:
 	var direction_x : float = 0
@@ -56,6 +62,9 @@ func _process(delta: float) -> void:
 	if logs:
 		logs.text = ('{pos}\n{vel}\n{interact}').format({'pos': position, 'vel': velocity, 'interact': '\n'.join(interactable_nodes)})
 
+	if is_interacting:
+		return
+
 	var speed := velocity.length()
 	if speed > 75:
 		sprite.play('run')
@@ -71,6 +80,12 @@ func _process(delta: float) -> void:
 		sprite.flip_h = true
 		shadow.position = shadow_coords_flipped
 
+	if Input.is_action_just_pressed("interact"):
+		if interactable_nodes[0].has_method('handle_interaction'):
+			interactable_nodes[0].handle_interaction()
+		else:
+			push_warning(interactable_nodes[0], ' has no method "handle_interaction"')
+		print('interacted')
 
 func add_interactable(node: Node2D):
 	interactable_nodes.append(node)
@@ -79,4 +94,48 @@ func add_interactable(node: Node2D):
 func remove_interactable(node: Node2D):
 	var id := node.get_instance_id()
 	interactable_nodes = interactable_nodes.filter(func(item): return item.get_instance_id() != id)
+	node.remove_child(interaction_tooltip_instance)
 	print('removed: ', node)
+
+func sort_interactable_by_distance():
+	return quicksort(interactable_nodes, func(a,b): return position.distance_squared_to(a.position) < position.distance_squared_to(b.position))
+
+func update_closest_interactable():
+	var sorted: Array[Node2D] = []
+	sorted.assign(sort_interactable_by_distance())
+	interactable_nodes = sorted
+	if interactable_nodes.size() > 0:
+		for node in interactable_nodes:
+			if node.get_children().has(interaction_tooltip_instance):
+				node.remove_child(interaction_tooltip_instance)
+		interactable_nodes[0].add_child(interaction_tooltip_instance)
+
+func _on_find_closest_timeout() -> void:
+	update_closest_interactable()
+
+func quicksort(array: Array, callable: Callable):
+	if array.size() <= 1:
+		return array
+
+	var pivot = array[0]
+
+	var left = []
+	var right = []
+
+	for i in range(1, array.size()):
+		if callable.call(array[i], pivot):
+			left.append(array[i])
+		else:
+			right.append(array[i])
+
+	var result: Array = quicksort(left, callable)
+	result.append(pivot)
+	result.append_array(quicksort(right, callable))
+
+	return result
+
+func _on_timeline_started() -> void:
+	is_interacting = true
+
+func _on_timeline_ended() -> void:
+	is_interacting = false
