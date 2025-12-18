@@ -1,4 +1,0 @@
-join detective leftmost
-join himari left
-join rosie rightmost [mirrored="true"]
-detective: Hello World!

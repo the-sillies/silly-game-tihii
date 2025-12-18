@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var player: CharacterBody2D = $'../Player'
 
 func _ready() -> void:
-	print(name, ' is ready')
+	print(player)
 
 func _on_interact_detection_area_body_entered(body: Node2D) -> void:
 	if body.has_method('player'):
@@ -12,6 +12,3 @@ func _on_interact_detection_area_body_entered(body: Node2D) -> void:
 func _on_interact_detection_area_body_exited(body: Node2D) -> void:
 	if body.has_method('player'):
 		player.remove_interactable(self)
-
-func handle_interaction():
-	Dialogic.start('timelineExample')

@@ -12,7 +12,7 @@
 },
 &"default_portrait": "default",
 &"description": "",
-&"display_name": "Rosie",
+&"display_name": "rosie",
 &"mirror": false,
 &"nicknames": [""],
 &"offset": Vector2(0, 0),

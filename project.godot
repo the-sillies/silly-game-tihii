@@ -31,8 +31,7 @@ directories/dch_directory={
 "rosie": "res://dialogic/characters/rosie.dch"
 }
 directories/dtl_directory={
-"timeline": "res://dialogic/timelines/timeline.dtl",
-"timelineExample": "res://dialogic/timelines/timelineExample.dtl"
+"timeline": "res://dialogic/timelines/timeline.dtl"
 }
 layout/style_directory={
 "": "res://dialogic/styles/default_style.tres",

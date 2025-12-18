@@ -1,7 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://7fgyw33joaxy"]
+[gd_scene load_steps=27 format=3 uid="uid://7fgyw33joaxy"]
 
 [ext_resource type="Script" uid="uid://citer8a5c2w1g" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="PackedScene" uid="uid://cm7x4exwl3jq8" path="res://scenes/interactionTooltip.tscn" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://uxyqq3rw3hdo" path="res://assets/sprites/Placeholder Woman.png" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://burxu3cqwg0po" path="res://assets/sprites/playerShadow.png" id="2_qhqgy"]
 
@@ -178,7 +177,6 @@ motion_mode = 1
 script = ExtResource("1_g2els")
 sprite = NodePath("AnimatedSprite2D")
 shadow = NodePath("Shadow")
-interaction_tooltip = ExtResource("2_dqkch")
 WALK_SPEED = 50.0
 RUN_SPEED = 100.0
 
@@ -194,10 +192,5 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_3vyb7")
-
-[node name="FindClosest" type="Timer" parent="."]
-wait_time = 0.05
-autostart = true
-
-[connection signal="timeout" from="FindClosest" to="." method="_on_find_closest_timeout"]
