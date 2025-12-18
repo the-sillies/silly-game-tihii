@@ -14,4 +14,4 @@ func _on_interact_detection_area_body_exited(body: Node2D) -> void:
 		player.remove_interactable(self)
 
 func handle_interaction():
-	Dialogic.start('timeline')
+	Dialogic.start('timelineExample')
