@@ -29,6 +29,8 @@ func player():
 func _ready():
 	set_shadow_coords(1, 2)
 	interaction_tooltip_instance = interaction_tooltip.instantiate()
+	Dialogic.timeline_started.connect(_on_timeline_started)
+	Dialogic.timeline_ended.connect(_on_timeline_ended)
 
 func _physics_process(delta: float) -> void:
 	var direction_x : float = 0
@@ -60,6 +62,9 @@ func _process(delta: float) -> void:
 	if logs:
 		logs.text = ('{pos}\n{vel}\n{interact}').format({'pos': position, 'vel': velocity, 'interact': '\n'.join(interactable_nodes)})
 
+	if is_interacting:
+		return
+
 	var speed := velocity.length()
 	if speed > 75:
 		sprite.play('run')
@@ -79,7 +84,7 @@ func _process(delta: float) -> void:
 		if interactable_nodes[0].has_method('handle_interaction'):
 			interactable_nodes[0].handle_interaction()
 		else:
-			push_warning('%s has no method "handle_interaction"' % interactable_nodes[0])
+			push_warning(interactable_nodes[0], ' has no method "handle_interaction"')
 		print('interacted')
 
 func add_interactable(node: Node2D):
@@ -128,3 +133,9 @@ func quicksort(array: Array, callable: Callable):
 	result.append_array(quicksort(right, callable))
 
 	return result
+
+func _on_timeline_started() -> void:
+	is_interacting = true
+
+func _on_timeline_ended() -> void:
+	is_interacting = false
