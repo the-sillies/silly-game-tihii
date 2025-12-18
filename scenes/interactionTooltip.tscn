@@ -41,5 +41,5 @@ theme_override_constants/margin_bottom = 1
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
-text = "F"
+text = "E"
 label_settings = SubResource("LabelSettings_r67kn")
