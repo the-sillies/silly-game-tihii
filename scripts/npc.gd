@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var player: CharacterBody2D = $'../Player'
 
 func _ready() -> void:
-	print(player)
+	print(name, ' is ready')
 
 func _on_interact_detection_area_body_entered(body: Node2D) -> void:
 	if body.has_method('player'):
