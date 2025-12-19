@@ -1,4 +1,12 @@
-join detective leftmost
-join himari left
-join rosie rightmost [mirrored="true"]
+join detective leftmost [animation="Fade In Up"]
+[wait time="0.2"]
+join himari left [animation="Fade In Up"]
+[wait time="0.2"]
+join rosie rightmost [animation="Fade In Up" mirrored="true"]
+[wait time="0.2"]
 detective: Hello World!
+leave detective [animation="Fade Out Down"]
+[wait time="0.2"]
+leave himari [animation="Fade Out Down"]
+[wait time="0.2"]
+leave rosie [animation="Fade Out Down"]
